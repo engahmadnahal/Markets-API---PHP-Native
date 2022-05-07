@@ -1,5 +1,4 @@
 <?php 
-header('Content-Type: application/json');
 require_once '../Controller.php';
 require_once '../AuthController.php';
 require_once '../../model/Admin.php';
