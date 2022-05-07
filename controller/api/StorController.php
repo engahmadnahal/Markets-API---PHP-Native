@@ -156,7 +156,7 @@ class StorController extends Controller {
                 $nameFile = $isUpload['name'];
                 $stor = new Stor();
                 $data = $stor->insert("name ,description , phone , logo , category_id",
-                "$name,$description,$phone,$nameFile ,$category_id");
+                "$name,$description,$phone,$nameFile,$category_id");
 
                 $category = new Category();
                 $catData = $category->select($category_id)->get();
