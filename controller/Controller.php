@@ -26,7 +26,7 @@ abstract Class Controller{
         $target_file = $target_dir . time() .basename($_FILES[$inputName]["name"]);
         $isUpload = move_uploaded_file($_FILES[$inputName]["tmp_name"], $target_file);
         return [
-            'name' => $target_file,
+            'name' => 'media/'. time() .basename($_FILES[$inputName]["name"]),
             'status' => $isUpload
         ];
     }
