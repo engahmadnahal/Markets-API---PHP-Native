@@ -1,0 +1,61 @@
+CREATE TABLE IF NOT EXISTS `Admins` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `status` TINYINT NULL,
+  `title` VARCHAR(45) NULL,
+  `description` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `stor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(45) NOT NULL,
+  `logo` VARCHAR(255) NOT NULL,
+  `category_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_stor_category_idx` (`category_id` ASC),
+  CONSTRAINT `fk_stor_category`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `rating` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `like` TINYINT NOT NULL,
+  `dislike` TINYINT NOT NULL,
+  `users_id` INT NOT NULL,
+  `stor_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_rating_users1_idx` (`users_id` ASC),
+  INDEX `fk_rating_stor1_idx` (`stor_id` ASC),
+  CONSTRAINT `fk_rating_users1`
+    FOREIGN KEY (`users_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rating_stor1`
+    FOREIGN KEY (`stor_id`)
+    REFERENCES `stor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
